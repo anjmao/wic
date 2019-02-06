@@ -1,0 +1,54 @@
+syntax = "proto3";
+package winter;
+
+service WinterGame {
+    rpc Play(stream PlayRequest) returns (stream PlayReply) {}
+    rpc ListGames(ListGamesRequest) returns (ListGamesReply) {}
+}
+
+message PlayRequest {
+  Start start = 1;
+  ShootAt shootAt = 2;
+}
+
+message PlayReply {
+  Ready ready = 1;
+  Zombie zombie = 2;
+  ShootResult shootResult = 3;
+}
+
+message Start {
+  string playerName = 1;
+  string gameID = 2;
+}
+
+message ShootAt {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+message ShootResult {
+  string playerName = 1;
+  string zombieName = 2;
+  int32 points = 3;
+}
+
+message Ready {
+  string gameID = 1;
+}
+
+message Zombie {
+  int32 x = 1;
+  int32 y = 2;
+  string name = 3;
+  bool reachedWall = 4;
+}
+
+message WonPlayer {
+  string name = 1;
+}
+
+message ListGamesRequest {}
+message ListGamesReply {
+  repeated string games = 1;
+}
