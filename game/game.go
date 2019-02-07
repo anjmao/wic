@@ -138,7 +138,7 @@ func (g *Game) end() {
 	g.quitCh <- struct{}{}
 }
 
-// sendEvent sends game notifyCh to all connected players.\
+// sendEvent sends game notifyCh to all connected players.
 func (g *Game) sendEvent(e Event) {
 	g.playersMux.RLock()
 	players := g.players
